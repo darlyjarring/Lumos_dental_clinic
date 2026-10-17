@@ -11,21 +11,25 @@
     <!-- SheetJS (XLSX) Library for Local Excel Import/Export -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
                     },
                     colors: {
-                        brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
+                        lumos: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
                         }
                     }
                 }
@@ -33,23 +37,23 @@
         }
     </script>
 </head>
-<body class="h-full text-slate-800 antialiased flex flex-col md:flex-row overflow-hidden">
+<body class="h-full text-slate-800 antialiased flex flex-col md:flex-row overflow-hidden bg-slate-50">
 
     <!-- Toast Notification System -->
     <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
     <!-- Sidebar Navigation -->
-    <aside class="w-full md:w-64 bg-slate-900 text-white flex-shrink-0 flex flex-col justify-between z-20">
+    <aside class="w-full md:w-64 bg-slate-900 text-white flex-shrink-0 flex flex-col justify-between z-20 border-r border-slate-800">
         <div>
             <!-- Logo Section -->
-            <div class="p-5 flex items-center justify-between border-b border-slate-800">
+            <div class="p-5 flex items-center justify-between border-b border-slate-800 bg-slate-950/40">
                 <div class="flex items-center space-x-3">
-                    <div class="bg-brand-500 p-2 rounded-xl text-white shadow-lg shadow-brand-500/30">
-                        <i class="fa-solid fa-tooth text-xl"></i>
+                    <div class="bg-gradient-to-tr from-lumos-600 to-lumos-400 p-2.5 rounded-xl text-white shadow-lg shadow-lumos-600/30">
+                        <i class="fa-solid fa-tooth text-2xl"></i>
                     </div>
                     <div>
-                        <h1 class="font-bold text-lg leading-tight">Lumos</h1>
-                        <p class="text-xs text-slate-400">Dental Clinic</p>
+                        <h1 class="font-heading font-bold text-lg leading-tight tracking-wide text-white">LUMOS</h1>
+                        <p class="text-xs text-lumos-200 font-medium tracking-wider">DENTAL CLINIC</p>
                     </div>
                 </div>
             </div>
@@ -57,40 +61,40 @@
             <!-- Navigation Links -->
             <nav class="p-4 space-y-1">
                 <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn active w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-slate-300 hover:bg-slate-800 hover:text-white">
-                    <i class="fa-solid fa-chart-pie w-5 text-center"></i>
+                    <i class="fa-solid fa-chart-pie w-5 text-center text-lumos-400"></i>
                     <span>Dashboard</span>
                 </button>
                 <button onclick="switchTab('pacientes')" id="nav-pacientes" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-slate-300 hover:bg-slate-800 hover:text-white">
-                    <i class="fa-solid fa-users w-5 text-center"></i>
+                    <i class="fa-solid fa-hospital-user w-5 text-center text-lumos-400"></i>
                     <span>Pacientes</span>
                 </button>
-                <button onclick="switchTab('citas')" id="nav-citas" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-slate-300 hover:bg-slate-800 hover:text-white">
-                    <i class="fa-solid fa-calendar-check w-5 text-center"></i>
-                    <span>Citas Médicas</span>
-                </button>
                 <button onclick="switchTab('odontograma')" id="nav-odontograma" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-slate-300 hover:bg-slate-800 hover:text-white">
-                    <i class="fa-solid fa-teeth w-5 text-center"></i>
-                    <span>Odontograma</span>
+                    <i class="fa-solid fa-teeth-open w-5 text-center text-lumos-400"></i>
+                    <span>Odontograma Clinico</span>
+                </button>
+                <button onclick="switchTab('citas')" id="nav-citas" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-slate-300 hover:bg-slate-800 hover:text-white">
+                    <i class="fa-solid fa-calendar-check w-5 text-center text-lumos-400"></i>
+                    <span>Agenda de Citas</span>
                 </button>
                 <button onclick="switchTab('cobros')" id="nav-cobros" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-slate-300 hover:bg-slate-800 hover:text-white">
-                    <i class="fa-solid fa-file-invoice-dollar w-5 text-center"></i>
+                    <i class="fa-solid fa-file-invoice-dollar w-5 text-center text-lumos-400"></i>
                     <span>Cobros y Caja</span>
                 </button>
                 <button onclick="switchTab('excel')" id="nav-excel" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-slate-300 hover:bg-slate-800 hover:text-white">
                     <i class="fa-solid fa-file-excel w-5 text-center text-emerald-400"></i>
-                    <span>Base de Datos Excel</span>
+                    <span>Base Datos Excel</span>
                 </button>
             </nav>
         </div>
 
         <!-- Footer Info -->
-        <div class="p-4 border-t border-slate-800 bg-slate-950/50">
+        <div class="p-4 border-t border-slate-800 bg-slate-950/60">
             <div class="flex items-center justify-between text-xs text-slate-400">
-                <span class="flex items-center gap-1.5">
+                <span class="flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    Excel Local Ativo
+                    Excel Local Activo
                 </span>
-                <span class="text-slate-500">v1.2</span>
+                <span class="text-slate-500 font-mono">v3.0</span>
             </div>
         </div>
     </aside>
@@ -99,12 +103,15 @@
     <main class="flex-1 flex flex-col h-full overflow-y-auto bg-slate-50">
         
         <!-- Topbar -->
-        <header class="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
-            <h2 id="page-title" class="text-xl font-bold text-slate-800">Dashboard</h2>
+        <header class="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-10 shadow-sm">
             <div class="flex items-center space-x-3">
-                <button onclick="exportToExcel()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2 shadow-sm transition">
+                <h2 id="page-title" class="font-heading text-xl font-bold text-slate-800">Dashboard</h2>
+                <span class="text-xs bg-lumos-50 text-lumos-700 font-semibold px-2.5 py-1 rounded-md border border-lumos-200 hidden sm:inline-block">Lumos Dental Clinic</span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button onclick="exportToExcel()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl text-sm font-medium flex items-center gap-2 shadow-sm transition">
                     <i class="fa-solid fa-file-export"></i>
-                    <span class="hidden sm:inline">Guardar en Excel</span>
+                    <span class="hidden sm:inline">Respaldar Excel</span>
                 </button>
             </div>
         </header>
@@ -118,16 +125,16 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
                         <div>
-                            <p class="text-xs font-semibold text-slate-500 uppercase">Total Pacientes</p>
+                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Pacientes</p>
                             <h3 id="stat-pacientes" class="text-2xl font-bold text-slate-800 mt-1">0</h3>
                         </div>
-                        <div class="p-3 bg-blue-50 text-brand-600 rounded-xl">
+                        <div class="p-3 bg-lumos-50 text-lumos-600 rounded-xl">
                             <i class="fa-solid fa-users text-xl"></i>
                         </div>
                     </div>
                     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
                         <div>
-                            <p class="text-xs font-semibold text-slate-500 uppercase">Citas para Hoy</p>
+                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Citas de Hoy</p>
                             <h3 id="stat-citas-hoy" class="text-2xl font-bold text-slate-800 mt-1">0</h3>
                         </div>
                         <div class="p-3 bg-amber-50 text-amber-600 rounded-xl">
@@ -136,16 +143,16 @@
                     </div>
                     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
                         <div>
-                            <p class="text-xs font-semibold text-slate-500 uppercase">Tratamientos Hoy</p>
+                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Atendidos Hoy</p>
                             <h3 id="stat-tratamientos" class="text-2xl font-bold text-slate-800 mt-1">0</h3>
                         </div>
                         <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
-                            <i class="fa-solid fa-kit-medical text-xl"></i>
+                            <i class="fa-solid fa-tooth text-xl"></i>
                         </div>
                     </div>
                     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
                         <div>
-                            <p class="text-xs font-semibold text-slate-500 uppercase">Ingresos del Día</p>
+                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Ingresos del Día</p>
                             <h3 id="stat-ingresos" class="text-2xl font-bold text-slate-800 mt-1">$0.00</h3>
                         </div>
                         <div class="p-3 bg-purple-50 text-purple-600 rounded-xl">
@@ -160,9 +167,9 @@
                     <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-slate-800 flex items-center gap-2">
-                                <i class="fa-solid fa-clock text-brand-600"></i> Citas Programadas para Hoy
+                                <i class="fa-solid fa-clock text-lumos-600"></i> Citas Programadas para Hoy
                             </h3>
-                            <button onclick="switchTab('citas')" class="text-sm font-semibold text-brand-600 hover:text-brand-700">Ver todas</button>
+                            <button onclick="switchTab('citas')" class="text-xs font-semibold text-lumos-600 hover:text-lumos-700">Ver todas</button>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
@@ -188,16 +195,16 @@
                         </h3>
                         <div class="space-y-2">
                             <button onclick="openModal('modal-paciente')" class="w-full bg-slate-50 hover:bg-slate-100 text-slate-700 font-medium p-3 rounded-xl border border-slate-200 flex items-center space-x-3 transition">
-                                <i class="fa-solid fa-user-plus text-brand-600"></i>
-                                <span>Registrar Nuevo Paciente</span>
+                                <i class="fa-solid fa-user-plus text-lumos-600"></i>
+                                <span>Registrar Paciente</span>
                             </button>
                             <button onclick="openModal('modal-cita')" class="w-full bg-slate-50 hover:bg-slate-100 text-slate-700 font-medium p-3 rounded-xl border border-slate-200 flex items-center space-x-3 transition">
                                 <i class="fa-solid fa-calendar-plus text-emerald-600"></i>
-                                <span>Agendar Nueva Cita</span>
+                                <span>Agendar Cita</span>
                             </button>
                             <button onclick="openModal('modal-cobro')" class="w-full bg-slate-50 hover:bg-slate-100 text-slate-700 font-medium p-3 rounded-xl border border-slate-200 flex items-center space-x-3 transition">
                                 <i class="fa-solid fa-receipt text-purple-600"></i>
-                                <span>Registrar Cobro</span>
+                                <span>Registrar Pago / Cobro</span>
                             </button>
                         </div>
                     </div>
@@ -209,9 +216,9 @@
                 <div class="flex flex-col sm:flex-row justify-between gap-3">
                     <div class="relative flex-1">
                         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400"></i>
-                        <input type="text" id="search-pacientes" onkeyup="renderPacientes()" placeholder="Buscar por nombre, cédula o teléfono..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
+                        <input type="text" id="search-pacientes" onkeyup="renderPacientes()" placeholder="Buscar por nombre, cédula o teléfono..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500 text-sm">
                     </div>
-                    <button onclick="openModal('modal-paciente')" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-xl text-sm font-medium flex items-center justify-center gap-2 shadow-sm transition">
+                    <button onclick="openModal('modal-paciente')" class="bg-lumos-600 hover:bg-lumos-700 text-white px-4 py-2.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 shadow-sm transition">
                         <i class="fa-solid fa-plus"></i> Nuevo Paciente
                     </button>
                 </div>
@@ -221,10 +228,10 @@
                         <table class="w-full text-left border-collapse">
                             <thead class="bg-slate-50 border-b border-slate-200 text-xs font-semibold uppercase text-slate-500">
                                 <tr>
-                                    <th class="p-4">Cédula/ID</th>
+                                    <th class="p-4">Cédula / ID</th>
                                     <th class="p-4">Nombre Completo</th>
                                     <th class="p-4">Teléfono</th>
-                                    <th class="p-4">Alergias</th>
+                                    <th class="p-4">Alergias / Antecedentes</th>
                                     <th class="p-4 text-center">Acciones</th>
                                 </tr>
                             </thead>
@@ -236,14 +243,145 @@
                 </div>
             </section>
 
-            <!-- 3. CITAS VIEW -->
+            <!-- 3. ODONTOGRAMA CLINICO VIEW (CON REGISTRO DUAL DE FECHAS) -->
+            <section id="view-odontograma" class="tab-content hidden space-y-6">
+                
+                <!-- Patient Selector & Dual Date Session Control Bar -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Patient Picker -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Paciente</label>
+                            <select id="select-paciente-odontograma" onchange="onPacienteOdontogramaChange()" class="w-full p-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-lumos-500">
+                                <!-- Dynamic Options -->
+                            </select>
+                        </div>
+
+                        <!-- Session Picker -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Historial de Evaluación Odontológica</label>
+                            <select id="select-fecha-odontograma" onchange="loadOdontogramaPorFecha()" class="w-full p-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-lumos-500">
+                                <!-- Dynamic Sessions List -->
+                            </select>
+                        </div>
+
+                        <!-- Add Session Button -->
+                        <div class="flex items-end">
+                            <button onclick="crearNuevaSesionOdontograma()" class="w-full bg-lumos-600 hover:bg-lumos-700 text-white px-4 py-2.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 shadow-sm transition">
+                                <i class="fa-solid fa-calendar-plus"></i> Registrar Evaluación
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dual Dates Banner for Current Session -->
+                    <div id="banner-fechas-sesion" class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex flex-wrap items-center justify-between text-xs font-medium gap-2">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-slate-600 flex items-center gap-1.5">
+                                <i class="fa-solid fa-user-clock text-lumos-600"></i>
+                                <strong>Fecha Consulta Presencial:</strong> <span id="lbl-fecha-consulta" class="text-slate-800">--/--/----</span>
+                            </span>
+                            <span class="text-slate-400">|</span>
+                            <span class="text-slate-600 flex items-center gap-1.5">
+                                <i class="fa-solid fa-notes-medical text-emerald-600"></i>
+                                <strong>Fecha Clínica / Diagnóstico:</strong> <span id="lbl-fecha-clinica" class="text-slate-800">--/--/----</span>
+                            </span>
+                        </div>
+                        <span class="text-slate-400 italic">Doble Registro Clínico Verificado</span>
+                    </div>
+                </div>
+
+                <!-- Legend Bar -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-center gap-4 text-xs font-medium">
+                    <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full bg-emerald-500 inline-block"></span> Sana</span>
+                    <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full bg-red-500 inline-block"></span> Caries</span>
+                    <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full bg-blue-500 inline-block"></span> Tratada / Restaurada</span>
+                    <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full bg-amber-500 inline-block"></span> Endodoncia</span>
+                    <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full bg-purple-500 inline-block"></span> Corona / Prótesis</span>
+                    <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full bg-slate-500 inline-block"></span> Ausente / Extraída (X)</span>
+                </div>
+
+                <!-- Odontogram Interactive Visualizer -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="flex items-center justify-between border-b pb-3">
+                        <div class="flex items-center space-x-4">
+                            <h3 class="font-bold text-slate-800">Odontograma Interactivo</h3>
+                            <div class="flex bg-slate-100 p-1 rounded-lg text-xs font-medium">
+                                <button onclick="switchDentition('permanente')" id="btn-dentition-perm" class="px-3 py-1 rounded-md bg-white text-slate-800 shadow-sm">Permanente (Adultos)</button>
+                                <button onclick="switchDentition('decidua')" id="btn-dentition-dec" class="px-3 py-1 rounded-md text-slate-500 hover:text-slate-800">Decidua (Niños)</button>
+                            </div>
+                        </div>
+                        <span class="text-xs text-slate-400">Haga clic en una pieza para modificar estado</span>
+                    </div>
+
+                    <!-- Permanent Teeth Arcada -->
+                    <div id="grid-permanente" class="space-y-6">
+                        <!-- Superior Teeth Arcada -->
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 text-center">Arcada Superior (Maxilar)</p>
+                            <div id="odontograma-upper" class="flex flex-wrap justify-center gap-2"></div>
+                        </div>
+
+                        <!-- Divider Line -->
+                        <div class="border-t border-dashed border-slate-200 my-4"></div>
+
+                        <!-- Inferior Teeth Arcada -->
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 text-center">Arcada Inferior (Mandíbula)</p>
+                            <div id="odontograma-lower" class="flex flex-wrap justify-center gap-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Deciduous Teeth Arcada (Hidden by default) -->
+                    <div id="grid-decidua" class="space-y-6 hidden">
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 text-center">Arcada Superior Temporal</p>
+                            <div id="odontograma-upper-dec" class="flex flex-wrap justify-center gap-2"></div>
+                        </div>
+
+                        <div class="border-t border-dashed border-slate-200 my-4"></div>
+
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 text-center">Arcada Inferior Temporal</p>
+                            <div id="odontograma-lower-dec" class="flex flex-wrap justify-center gap-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clinical Notes and Details Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Session Notes -->
+                    <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-clipboard-user text-lumos-600"></i> Observaciones Generales de la Consulta Presencial
+                        </h4>
+                        <textarea id="odontograma-notas" rows="4" placeholder="Diagnóstico general de la atención presencial, dolor referido, plan de tratamiento recomendado..." class="w-full p-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-lumos-500"></textarea>
+                        <div class="flex justify-end">
+                            <button onclick="saveOdontogramaNotas()" class="bg-lumos-600 hover:bg-lumos-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition shadow-sm">
+                                Guardar Notas
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Diagnostic per Tooth -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-emerald-600"></i> Hallazgos Registrados en Sesión
+                        </h4>
+                        <div id="lista-hallazgos-dientes" class="space-y-2 max-h-56 overflow-y-auto pr-1 text-xs">
+                            <!-- Dynamic summary list -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. CITAS VIEW -->
             <section id="view-citas" class="tab-content hidden space-y-4">
                 <div class="flex flex-col sm:flex-row justify-between gap-3">
                     <div class="flex items-center gap-2">
-                        <input type="date" id="filter-fecha-cita" onchange="renderCitas()" class="px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <input type="date" id="filter-fecha-cita" onchange="renderCitas()" class="px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-lumos-500">
                         <button onclick="clearFechaCita()" class="text-xs text-slate-500 underline">Ver todas</button>
                     </div>
-                    <button onclick="openModal('modal-cita')" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-xl text-sm font-medium flex items-center justify-center gap-2 shadow-sm transition">
+                    <button onclick="openModal('modal-cita')" class="bg-lumos-600 hover:bg-lumos-700 text-white px-4 py-2 rounded-xl text-sm font-medium flex items-center justify-center gap-2 shadow-sm transition">
                         <i class="fa-solid fa-calendar-plus"></i> Nueva Cita
                     </button>
                 </div>
@@ -268,55 +406,12 @@
                 </div>
             </section>
 
-            <!-- 4. ODONTOGRAMA VIEW -->
-            <section id="view-odontograma" class="tab-content hidden space-y-6">
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div class="w-full sm:w-72">
-                        <label class="block text-xs font-semibold text-slate-500 mb-1">Seleccionar Paciente</label>
-                        <select id="select-paciente-odontograma" onchange="loadOdontograma()" class="w-full p-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                            <!-- Dynamic Options -->
-                        </select>
-                    </div>
-                    <div class="flex flex-wrap items-center gap-3 text-xs">
-                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-emerald-500"></span> Sano</span>
-                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-red-500"></span> Caries</span>
-                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-blue-500"></span> Tratado</span>
-                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-slate-400"></span> Ausente/Extraído</span>
-                    </div>
-                </div>
-
-                <!-- Odontogram Interactive Visualizer -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
-                    <h3 class="font-bold text-slate-800 text-center border-b pb-3">Piezas Dentales (Arcada Superior e Inferior)</h3>
-                    
-                    <!-- Superior Teeth -->
-                    <div id="odontograma-upper" class="flex flex-wrap justify-center gap-2"></div>
-
-                    <!-- Divider Line -->
-                    <div class="border-t border-dashed border-slate-200 my-4"></div>
-
-                    <!-- Inferior Teeth -->
-                    <div id="odontograma-lower" class="flex flex-wrap justify-center gap-2"></div>
-                </div>
-
-                <!-- Dental Notes -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-                    <h4 class="font-bold text-slate-800 text-sm">Observaciones Clínicas del Paciente</h4>
-                    <textarea id="odontograma-notas" rows="3" placeholder="Añade detalles del tratamiento, diagnóstico general u observaciones..." class="w-full p-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
-                    <div class="flex justify-end">
-                        <button onclick="saveOdontogramaNotas()" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition">
-                            Guardar Notas Clínicas
-                        </button>
-                    </div>
-                </div>
-            </section>
-
             <!-- 5. COBROS Y CAJA VIEW -->
             <section id="view-cobros" class="tab-content hidden space-y-4">
                 <div class="flex justify-between items-center">
-                    <h3 class="font-bold text-slate-800">Historial de Cobros</h3>
-                    <button onclick="openModal('modal-cobro')" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2 shadow-sm transition">
-                        <i class="fa-solid fa-plus"></i> Nuevo Cobro
+                    <h3 class="font-bold text-slate-800">Historial de Cobros y Servicios</h3>
+                    <button onclick="openModal('modal-cobro')" class="bg-lumos-600 hover:bg-lumos-700 text-white px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2 shadow-sm transition">
+                        <i class="fa-solid fa-plus"></i> Registrar Cobro
                     </button>
                 </div>
 
@@ -327,7 +422,7 @@
                                 <tr>
                                     <th class="p-4">Fecha</th>
                                     <th class="p-4">Paciente</th>
-                                    <th class="p-4">Tratamiento / Concepto</th>
+                                    <th class="p-4">Concepto / Tratamiento</th>
                                     <th class="p-4">Monto ($)</th>
                                     <th class="p-4">Método de Pago</th>
                                 </tr>
@@ -346,8 +441,8 @@
                     <div class="flex items-center space-x-3 text-emerald-600">
                         <i class="fa-solid fa-file-excel text-3xl"></i>
                         <div>
-                            <h3 class="font-bold text-slate-800 text-lg">Almacenamiento Local en Excel</h3>
-                            <p class="text-xs text-slate-500">Exporta todos tus registros a un archivo `.xlsx` o restaura los datos desde uno previamente guardado.</p>
+                            <h3 class="font-bold text-slate-800 text-lg">Resguardo de Información en Excel Local</h3>
+                            <p class="text-xs text-slate-500">Exporte sus datos en cualquier momento para mantener copia de seguridad editable en Excel.</p>
                         </div>
                     </div>
 
@@ -359,21 +454,21 @@
                             <h4 class="font-bold text-slate-800 flex items-center gap-2">
                                 <i class="fa-solid fa-download text-emerald-600"></i> Exportar Base de Datos
                             </h4>
-                            <p class="text-xs text-slate-600">Genera un archivo Excel completo con pestañas para Pacientes, Citas, Odontograma y Cobros.</p>
+                            <p class="text-xs text-slate-600">Genera un archivo Excel con pestañas independientes para Pacientes, Citas, Cobros y el Historial del Odontograma con sus dos fechas asociadas.</p>
                             <button onclick="exportToExcel()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 rounded-xl text-sm transition shadow-sm flex justify-center items-center gap-2">
-                                <i class="fa-solid fa-file-arrow-down"></i> Descargar Excel Local (.xlsx)
+                                <i class="fa-solid fa-file-arrow-down"></i> Descargar Archivo Excel (.xlsx)
                             </button>
                         </div>
 
                         <!-- Import Box -->
                         <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3">
                             <h4 class="font-bold text-slate-800 flex items-center gap-2">
-                                <i class="fa-solid fa-upload text-brand-600"></i> Cargar/Importar Desde Excel
+                                <i class="fa-solid fa-upload text-lumos-600"></i> Cargar Desde Excel
                             </h4>
-                            <p class="text-xs text-slate-600">Carga un archivo Excel previo para restaurar o actualizar la información del sistema local.</p>
+                            <p class="text-xs text-slate-600">Restaure la información del consultorio cargando un archivo `.xlsx` generado previamente.</p>
                             <input type="file" id="input-excel-file" accept=".xlsx, .xls" class="hidden" onchange="importFromExcel(event)">
-                            <button onclick="document.getElementById('input-excel-file').click()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-2.5 rounded-xl text-sm transition shadow-sm flex justify-center items-center gap-2">
-                                <i class="fa-solid fa-file-arrow-up"></i> Seleccionar Archivo Excel
+                            <button onclick="document.getElementById('input-excel-file').click()" class="w-full bg-lumos-600 hover:bg-lumos-700 text-white font-medium py-2.5 rounded-xl text-sm transition shadow-sm flex justify-center items-center gap-2">
+                                <i class="fa-solid fa-file-arrow-up"></i> Seleccionar Excel para Importar
                             </button>
                         </div>
                     </div>
@@ -394,23 +489,23 @@
                 <input type="hidden" id="paciente-id">
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">Cédula / ID</label>
-                    <input type="text" id="paciente-cedula" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <input type="text" id="paciente-cedula" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">Nombre Completo</label>
-                    <input type="text" id="paciente-nombre" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <input type="text" id="paciente-nombre" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Teléfono</label>
-                    <input type="tel" id="paciente-telefono" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Teléfono de Contacto</label>
+                    <input type="tel" id="paciente-telefono" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Alergias o Condiciones Especiales</label>
-                    <textarea id="paciente-alergias" rows="2" placeholder="Ej: Alérgico a la Penicilina, Hipertensión..." class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Alergias o Antecedentes Médicos</label>
+                    <textarea id="paciente-alergias" rows="2" placeholder="Ej: Alérgico a penicilina, hipertenso, diabético..." class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500"></textarea>
                 </div>
                 <div class="flex justify-end space-x-2 pt-2">
                     <button type="button" onclick="closeModal('modal-paciente')" class="px-4 py-2 rounded-xl text-slate-600 border border-slate-200 hover:bg-slate-50 font-medium">Cancelar</button>
-                    <button type="submit" class="px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 font-medium shadow-sm">Guardar</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-lumos-600 text-white hover:bg-lumos-700 font-medium shadow-sm">Guardar Paciente</button>
                 </div>
             </form>
         </div>
@@ -420,33 +515,33 @@
     <div id="modal-cita" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl space-y-4">
             <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-bold text-slate-800">Agendar Nueva Cita</h3>
+                <h3 class="font-bold text-slate-800">Agendar Cita Médica</h3>
                 <button onclick="closeModal('modal-cita')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             <form id="form-cita" onsubmit="saveCita(event)" class="space-y-3 text-sm">
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">Paciente</label>
-                    <select id="cita-paciente-id" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <select id="cita-paciente-id" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
                         <!-- Dynamic Options -->
                     </select>
                 </div>
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 mb-1">Fecha</label>
-                        <input type="date" id="cita-fecha" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <input type="date" id="cita-fecha" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 mb-1">Hora</label>
-                        <input type="time" id="cita-hora" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <input type="time" id="cita-hora" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Motivo / Tratamiento</label>
-                    <input type="text" id="cita-motivo" placeholder="Ej: Limpieza, Evaluación, Endodoncia..." required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Motivo de la Cita</label>
+                    <input type="text" id="cita-motivo" placeholder="Ej: Evaluación, Limpieza, Dolor en muela..." required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
                 </div>
                 <div class="flex justify-end space-x-2 pt-2">
                     <button type="button" onclick="closeModal('modal-cita')" class="px-4 py-2 rounded-xl text-slate-600 border border-slate-200 hover:bg-slate-50 font-medium">Cancelar</button>
-                    <button type="submit" class="px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 font-medium shadow-sm">Guardar Cita</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-lumos-600 text-white hover:bg-lumos-700 font-medium shadow-sm">Agendar Cita</button>
                 </div>
             </form>
         </div>
@@ -456,28 +551,28 @@
     <div id="modal-cobro" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl space-y-4">
             <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-bold text-slate-800">Registrar Cobro / Pago</h3>
+                <h3 class="font-bold text-slate-800">Registrar Cobro / Servicio</h3>
                 <button onclick="closeModal('modal-cobro')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             <form id="form-cobro" onsubmit="saveCobro(event)" class="space-y-3 text-sm">
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">Paciente</label>
-                    <select id="cobro-paciente-id" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <select id="cobro-paciente-id" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
                         <!-- Dynamic Options -->
                     </select>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Concepto / Tratamiento</label>
-                    <input type="text" id="cobro-concepto" placeholder="Ej: Calza dental, Blanqueamiento..." required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Concepto / Servicio Odontológico</label>
+                    <input type="text" id="cobro-concepto" placeholder="Ej: Curación, Resina, Extracción molar..." required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
                 </div>
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 mb-1">Monto ($)</label>
-                        <input type="number" step="0.01" id="cobro-monto" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <input type="number" step="0.01" id="cobro-monto" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 mb-1">Método de Pago</label>
-                        <select id="cobro-metodo" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <select id="cobro-metodo" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
                             <option value="Efectivo">Efectivo</option>
                             <option value="Tarjeta">Tarjeta de Crédito/Débito</option>
                             <option value="Transferencia">Transferencia Bancaria</option>
@@ -486,9 +581,75 @@
                 </div>
                 <div class="flex justify-end space-x-2 pt-2">
                     <button type="button" onclick="closeModal('modal-cobro')" class="px-4 py-2 rounded-xl text-slate-600 border border-slate-200 hover:bg-slate-50 font-medium">Cancelar</button>
-                    <button type="submit" class="px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 font-medium shadow-sm">Registrar Pago</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-lumos-600 text-white hover:bg-lumos-700 font-medium shadow-sm">Registrar Pago</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- MODAL: NUEVA SESIÓN ODONTOGRAMA CON DUAL FECHAS -->
+    <div id="modal-nueva-sesion" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-slate-800">Registrar Evaluación Clínico-Dental</h3>
+                <button onclick="closeModal('modal-nueva-sesion')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form id="form-nueva-sesion" onsubmit="saveNuevaSesionOdontograma(event)" class="space-y-3 text-sm">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">
+                        1. Fecha de Consulta Presencial (Atención del Paciente)
+                    </label>
+                    <input type="date" id="nueva-sesion-fecha-consulta" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">
+                        2. Fecha Clínica / Diagnóstico (Expediente Formal)
+                    </label>
+                    <input type="date" id="nueva-sesion-fecha-clinica" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
+                </div>
+                <div class="flex items-start gap-2 pt-1 bg-lumos-50 p-3 rounded-xl border border-lumos-200">
+                    <input type="checkbox" id="nueva-sesion-copiar-previo" checked class="mt-0.5 rounded border-slate-300 text-lumos-600 focus:ring-lumos-500">
+                    <label for="nueva-sesion-copiar-previo" class="text-xs text-slate-700 leading-tight">
+                        <strong>Transferir historial acumulado:</strong> Mantiene las piezas extraídas/ausentes y diagnósticos previos para actualizar solo lo hallado en esta fecha.
+                    </label>
+                </div>
+                <div class="flex justify-end space-x-2 pt-2">
+                    <button type="button" onclick="closeModal('modal-nueva-sesion')" class="px-4 py-2 rounded-xl text-slate-600 border border-slate-200 hover:bg-slate-50 font-medium">Cancelar</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-lumos-600 text-white hover:bg-lumos-700 font-medium shadow-sm">Crear Registro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: DETALLE/EDITAR PIEZA DENTAL -->
+    <div id="modal-tooth-detail" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 id="modal-tooth-title" class="font-bold text-slate-800">Pieza Dental #--</h3>
+                <button onclick="closeModal('modal-tooth-detail')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="space-y-3 text-sm">
+                <input type="hidden" id="modal-tooth-num">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Estado de la Pieza Dental</label>
+                    <select id="modal-tooth-status" class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
+                        <option value="sano">Sano (Normal)</option>
+                        <option value="caries">Caries Dental</option>
+                        <option value="tratado">Tratada / Restaurada (Resina/Amalgama)</option>
+                        <option value="endodoncia">Endodoncia / Tratamiento de Conducto</option>
+                        <option value="corona">Corona / Prótesis</option>
+                        <option value="ausente">Ausente / Extraída (Pieza Faltante)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Observaciones de la pieza</label>
+                    <input type="text" id="modal-tooth-obs" placeholder="Ej: Caries oclusal profunda, fractura..." class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lumos-500">
+                </div>
+                <div class="flex justify-end space-x-2 pt-2">
+                    <button type="button" onclick="closeModal('modal-tooth-detail')" class="px-4 py-2 rounded-xl text-slate-600 border border-slate-200 hover:bg-slate-50 font-medium">Cancelar</button>
+                    <button type="button" onclick="applyToothModalState()" class="px-4 py-2 rounded-xl bg-lumos-600 text-white hover:bg-lumos-700 font-medium shadow-sm">Aplicar Estado</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -498,20 +659,25 @@
         let db = {
             pacientes: [],
             citas: [],
-            odontograma: {}, // key: pacienteId, value: { notes: '', teeth: { toothNum: state } }
+            // Structure: db.odontograma[pacienteId] = [ { id: 'ses_1', fechaConsulta: '2026-10-16', fechaClinica: '2026-10-16', notes: '', teeth: { '18': 'sano', '17': 'ausente' }, teethObs: {} } ]
+            odontograma: {},
             cobros: []
         };
 
-        // Standard Tooth Numbers (FDI System)
+        // Tooth Numbers (FDI System)
         const upperTeeth = [18,17,16,15,14,13,12,11, 21,22,23,24,25,26,27,28];
         const lowerTeeth = [48,47,46,45,44,43,42,41, 31,32,33,34,35,36,37,38];
+        const upperDecidua = [55,54,53,52,51, 61,62,63,64,65];
+        const lowerDecidua = [85,84,83,82,81, 71,72,73,74,75];
 
-        // Tooth Status Colors
+        // Tooth Status Definitions & Styling
         const toothStates = {
-            'sano': { label: 'Sano', class: 'bg-emerald-100 border-emerald-500 text-emerald-700' },
-            'caries': { label: 'Caries', class: 'bg-red-100 border-red-500 text-red-700' },
-            'tratado': { label: 'Tratado', class: 'bg-blue-100 border-blue-500 text-blue-700' },
-            'ausente': { label: 'Ausente', class: 'bg-slate-200 border-slate-400 text-slate-500' }
+            'sano': { label: 'Sana', class: 'bg-emerald-50 border-emerald-500 text-emerald-700', icon: 'fa-tooth' },
+            'caries': { label: 'Caries', class: 'bg-red-100 border-red-500 text-red-700', icon: 'fa-bacteria' },
+            'tratado': { label: 'Tratada/Restaurada', class: 'bg-blue-100 border-blue-500 text-blue-700', icon: 'fa-fill-drip' },
+            'endodoncia': { label: 'Endodoncia', class: 'bg-amber-100 border-amber-500 text-amber-700', icon: 'fa-syringe' },
+            'corona': { label: 'Corona/Prótesis', class: 'bg-purple-100 border-purple-500 text-purple-700', icon: 'fa-crown' },
+            'ausente': { label: 'Ausente/Extraída', class: 'bg-slate-200 border-slate-500 text-slate-400 opacity-60', icon: 'fa-xmark' }
         };
 
         // --- INIT & LOCAL STORAGE ---
@@ -524,39 +690,52 @@
             renderPacientes();
             renderCitas();
             populatePacienteDropdowns();
-            renderOdontogramaTeeth();
         };
 
         function saveToLocalStorage() {
-            localStorage.setItem('dentalcare_db', JSON.stringify(db));
+            localStorage.setItem('lumos_dental_db_v3', JSON.stringify(db));
         }
 
         function loadFromLocalStorage() {
-            const data = localStorage.getItem('dentalcare_db');
+            const data = localStorage.getItem('lumos_dental_db_v3');
             if (data) {
                 try {
                     db = JSON.parse(data);
                 } catch (e) {
-                    console.error("Error loading local data", e);
+                    console.error("Error al cargar la base de datos local", e);
                 }
             }
         }
 
         function seedInitialData() {
+            const today = new Date().toISOString().split('T')[0];
+
             db.pacientes = [
-                { id: '1', cedula: '0912345678', nombre: 'María García', telefono: '0991234567', alergias: 'Ninguna' },
-                { id: '2', cedula: '0987654321', nombre: 'Carlos Mendoza', telefono: '0987654321', alergias: 'Penicilina' }
+                { id: '1', cedula: '0928374651', nombre: 'Ana Lucía Morales', telefono: '0991234567', alergias: 'Alergia a AINES' },
+                { id: '2', cedula: '0918273645', nombre: 'Roberto Fernández', telefono: '0987654321', alergias: 'Ninguna' }
             ];
 
-            const today = new Date().toISOString().split('T')[0];
             db.citas = [
-                { id: '1', pacienteId: '1', fecha: today, hora: '09:00', motivo: 'Limpieza y Evaluación', estado: 'Pendiente' },
-                { id: '2', pacienteId: '2', fecha: today, hora: '10:30', motivo: 'Tratamiento de Conducto', estado: 'Completada' }
+                { id: '1', pacienteId: '1', fecha: today, hora: '09:30', motivo: 'Evaluación y Diagnóstico', estado: 'Pendiente' },
+                { id: '2', pacienteId: '2', fecha: today, hora: '11:00', motivo: 'Limpieza e Higiene', estado: 'Completada' }
             ];
 
             db.cobros = [
-                { id: '1', pacienteId: '2', fecha: today, concepto: 'Tratamiento de Conducto', monto: 120.00, metodo: 'Efectivo' }
+                { id: '1', pacienteId: '2', fecha: today, concepto: 'Perfilaxis y Diagnóstico', monto: 45.00, metodo: 'Efectivo' }
             ];
+
+            db.odontograma = {
+                '1': [
+                    {
+                        id: 'ses_1',
+                        fechaConsulta: today,
+                        fechaClinica: today,
+                        notes: 'Paciente acude por molestia general. Se observa caries en molar superior.',
+                        teeth: { '18': 'ausente', '16': 'caries', '24': 'tratado' },
+                        teethObs: { '16': 'Caries en carilla oclusal' }
+                    }
+                ]
+            };
 
             saveToLocalStorage();
         }
@@ -572,13 +751,13 @@
 
             const titles = {
                 'dashboard': 'Dashboard Principal',
-                'pacientes': 'Gestión de Pacientes',
-                'citas': 'Agendamiento de Citas',
+                'pacientes': 'Expedientes de Pacientes',
                 'odontograma': 'Ficha Clínica & Odontograma',
-                'cobros': 'Caja & Cobros',
-                'excel': 'Base de Datos Local (Excel)'
+                'citas': 'Agenda e Historial de Citas',
+                'cobros': 'Caja & Cobros de Tratamientos',
+                'excel': 'Resguardo de Datos Local (Excel)'
             };
-            document.getElementById('page-title').innerText = titles[tabId] || 'Consultorio Dental';
+            document.getElementById('page-title').innerText = titles[tabId] || 'Lumos Dental Clinic';
 
             if (tabId === 'dashboard') updateDashboard();
             if (tabId === 'pacientes') renderPacientes();
@@ -604,28 +783,27 @@
                 .reduce((sum, c) => sum + parseFloat(c.monto || 0), 0);
             document.getElementById('stat-ingresos').innerText = `$${ingresosHoy.toFixed(2)}`;
 
-            // Render Dashboard Today's Appointments
             const tbody = document.getElementById('tbody-citas-hoy');
             tbody.innerHTML = '';
 
             if (citasHoy.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-slate-400">No hay citas agendadas para hoy.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-slate-400">No hay citas registradas para hoy.</td></tr>`;
                 return;
             }
 
             citasHoy.forEach(cita => {
                 const paciente = db.pacientes.find(p => p.id === cita.pacienteId);
-                const nombrePaciente = paciente ? paciente.nombre : 'Paciente Desconocido';
-                
+                const nombrePaciente = paciente ? paciente.nombre : 'Paciente';
+
                 const badge = cita.estado === 'Completada' 
-                    ? '<span class="px-2 py-1 text-xs rounded-full bg-emerald-100 text-emerald-700 font-medium">Completada</span>'
-                    : '<span class="px-2 py-1 text-xs rounded-full bg-amber-100 text-amber-700 font-medium">Pendiente</span>';
+                    ? '<span class="px-2.5 py-0.5 text-xs rounded-full bg-emerald-100 text-emerald-700 font-semibold">Atendido</span>'
+                    : '<span class="px-2.5 py-0.5 text-xs rounded-full bg-amber-100 text-amber-700 font-semibold">Pendiente</span>';
 
                 tbody.innerHTML += `
                     <tr>
                         <td class="py-3 font-semibold text-slate-700">${cita.hora}</td>
-                        <td class="py-3">${nombrePaciente}</td>
-                        <td class="py-3">${cita.motivo}</td>
+                        <td class="py-3 font-medium text-slate-800">${nombrePaciente}</td>
+                        <td class="py-3 text-slate-600">${cita.motivo}</td>
                         <td class="py-3">${badge}</td>
                     </tr>
                 `;
@@ -645,20 +823,20 @@
             );
 
             if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No se encontraron pacientes.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No se encontraron registros.</td></tr>`;
                 return;
             }
 
             filtered.forEach(p => {
                 tbody.innerHTML += `
                     <tr class="hover:bg-slate-50 transition">
-                        <td class="p-4 font-medium text-slate-700">${p.cedula}</td>
+                        <td class="p-4 font-mono font-medium text-slate-700">${p.cedula}</td>
                         <td class="p-4 font-semibold text-slate-800">${p.nombre}</td>
-                        <td class="p-4">${p.telefono}</td>
-                        <td class="p-4 text-xs text-slate-500">${p.alergias || 'Sin observaciones'}</td>
+                        <td class="p-4 text-slate-600">${p.telefono}</td>
+                        <td class="p-4 text-xs text-slate-500">${p.alergias || 'Sin alergias registradas'}</td>
                         <td class="p-4 text-center space-x-2">
-                            <button onclick="editPaciente('${p.id}')" class="text-brand-600 hover:text-brand-800 p-1"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button onclick="deletePaciente('${p.id}')" class="text-red-500 hover:text-red-700 p-1"><i class="fa-solid fa-trash"></i></button>
+                            <button onclick="editPaciente('${p.id}')" class="text-lumos-600 hover:text-lumos-800 p-1" title="Editar Expediente"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button onclick="deletePaciente('${p.id}')" class="text-red-500 hover:text-red-700 p-1" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 `;
@@ -684,7 +862,7 @@
             closeModal('modal-paciente');
             renderPacientes();
             populatePacienteDropdowns();
-            showToast('Paciente guardado exitosamente', 'success');
+            showToast('Expediente del paciente guardado', 'success');
         }
 
         function editPaciente(id) {
@@ -696,13 +874,14 @@
             document.getElementById('paciente-telefono').value = p.telefono;
             document.getElementById('paciente-alergias').value = p.alergias || '';
             
-            document.getElementById('modal-paciente-title').innerText = 'Editar Paciente';
+            document.getElementById('modal-paciente-title').innerText = 'Editar Datos de Paciente';
             openModal('modal-paciente');
         }
 
         function deletePaciente(id) {
-            if (confirm('¿Está seguro de eliminar este paciente?')) {
+            if (confirm('¿Desea eliminar este paciente y todo su historial clínico?')) {
                 db.pacientes = db.pacientes.filter(p => p.id !== id);
+                delete db.odontograma[id];
                 saveToLocalStorage();
                 renderPacientes();
                 populatePacienteDropdowns();
@@ -722,26 +901,26 @@
             }
 
             if (list.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No hay citas agendadas.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No existen citas programadas.</td></tr>`;
                 return;
             }
 
             list.forEach(cita => {
                 const paciente = db.pacientes.find(p => p.id === cita.pacienteId);
-                const nombrePaciente = paciente ? paciente.nombre : 'Paciente Desconocido';
+                const nombrePaciente = paciente ? paciente.nombre : 'Paciente';
 
                 const badge = cita.estado === 'Completada' 
-                    ? '<span class="px-2.5 py-1 text-xs rounded-full bg-emerald-100 text-emerald-700 font-medium">Completada</span>'
-                    : '<span class="px-2.5 py-1 text-xs rounded-full bg-amber-100 text-amber-700 font-medium">Pendiente</span>';
+                    ? '<span class="px-2.5 py-1 text-xs rounded-full bg-emerald-100 text-emerald-700 font-semibold">Completada</span>'
+                    : '<span class="px-2.5 py-1 text-xs rounded-full bg-amber-100 text-amber-700 font-semibold">Pendiente</span>';
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-slate-50 transition">
-                        <td class="p-4 font-medium text-slate-700">${cita.fecha} - ${cita.hora}</td>
+                        <td class="p-4 font-medium text-slate-700">${cita.fecha} &bull; ${cita.hora}</td>
                         <td class="p-4 font-semibold text-slate-800">${nombrePaciente}</td>
-                        <td class="p-4">${cita.motivo}</td>
+                        <td class="p-4 text-slate-600">${cita.motivo}</td>
                         <td class="p-4">${badge}</td>
                         <td class="p-4 text-center space-x-2">
-                            <button onclick="toggleCitaEstado('${cita.id}')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded-lg border border-slate-300">Cambiar Estado</button>
+                            <button onclick="toggleCitaEstado('${cita.id}')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-300">Cambiar Estado</button>
                             <button onclick="deleteCita('${cita.id}')" class="text-red-500 hover:text-red-700 p-1"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
@@ -773,16 +952,16 @@
                 cita.estado = cita.estado === 'Pendiente' ? 'Completada' : 'Pendiente';
                 saveToLocalStorage();
                 renderCitas();
-                showToast(`Cita marcada como ${cita.estado}`, 'info');
+                showToast(`Cita actualizada a ${cita.estado}`, 'info');
             }
         }
 
         function deleteCita(id) {
-            if (confirm('¿Eliminar cita?')) {
+            if (confirm('¿Eliminar cita programada?')) {
                 db.citas = db.citas.filter(c => c.id !== id);
                 saveToLocalStorage();
                 renderCitas();
-                showToast('Cita eliminada', 'info');
+                showToast('Cita cancelada', 'info');
             }
         }
 
@@ -791,79 +970,268 @@
             renderCitas();
         }
 
-        // --- ODONTOGRAMA ---
-        function renderOdontogramaTeeth() {
-            const upperContainer = document.getElementById('odontograma-upper');
-            const lowerContainer = document.getElementById('odontograma-lower');
+        // --- ODONTOGRAMA CON REGISTRO DUAL DE FECHAS Y EVOLUCIÓN HISTÓRICA ---
 
-            upperContainer.innerHTML = '';
-            lowerContainer.innerHTML = '';
+        function onPacienteOdontogramaChange() {
+            populateFechasOdontograma();
+            loadOdontogramaPorFecha();
+        }
 
+        function populateFechasOdontograma() {
             const pacienteId = document.getElementById('select-paciente-odontograma').value;
-            const teethData = (db.odontograma[pacienteId] && db.odontograma[pacienteId].teeth) || {};
+            const selectFecha = document.getElementById('select-fecha-odontograma');
+            selectFecha.innerHTML = '';
 
-            upperTeeth.forEach(num => {
-                const state = teethData[num] || 'sano';
-                upperContainer.appendChild(createToothElement(num, state));
-            });
+            if (!pacienteId) return;
 
-            lowerTeeth.forEach(num => {
-                const state = teethData[num] || 'sano';
-                lowerContainer.appendChild(createToothElement(num, state));
+            if (!db.odontograma[pacienteId] || db.odontograma[pacienteId].length === 0) {
+                const today = new Date().toISOString().split('T')[0];
+                db.odontograma[pacienteId] = [{
+                    id: 'ses_' + Date.now(),
+                    fechaConsulta: today,
+                    fechaClinica: today,
+                    notes: '',
+                    teeth: {},
+                    teethObs: {}
+                }];
+                saveToLocalStorage();
+            }
+
+            const sesiones = db.odontograma[pacienteId] || [];
+            // Order sessions by clinica date descending
+            sesiones.sort((a,b) => new Date(b.fechaClinica) - new Date(a.fechaClinica));
+
+            sesiones.forEach((s, idx) => {
+                selectFecha.innerHTML += `
+                    <option value="${s.id}">
+                        Consulta: ${s.fechaConsulta} | Ficha Clínica: ${s.fechaClinica} ${idx === 0 ? '(Última)' : ''}
+                    </option>
+                `;
             });
         }
 
-        function createToothElement(num, state) {
+        function getActiveSesion() {
+            const pacienteId = document.getElementById('select-paciente-odontograma').value;
+            const sesionId = document.getElementById('select-fecha-odontograma').value;
+
+            if (!pacienteId || !sesionId || !db.odontograma[pacienteId]) return null;
+            return db.odontograma[pacienteId].find(s => s.id === sesionId) || null;
+        }
+
+        function loadOdontogramaPorFecha() {
+            const pacienteId = document.getElementById('select-paciente-odontograma').value;
+            const sesion = getActiveSesion();
+
+            const lblConsulta = document.getElementById('lbl-fecha-consulta');
+            const lblClinica = document.getElementById('lbl-fecha-clinica');
+            const notasEl = document.getElementById('odontograma-notas');
+
+            if (!pacienteId || !sesion) {
+                lblConsulta.innerText = '--/--/----';
+                lblClinica.innerText = '--/--/----';
+                notasEl.value = '';
+                renderTeethGrid({}, {});
+                return;
+            }
+
+            lblConsulta.innerText = sesion.fechaConsulta || sesion.fecha || '--';
+            lblClinica.innerText = sesion.fechaClinica || sesion.fecha || '--';
+            notasEl.value = sesion.notes || '';
+
+            renderTeethGrid(sesion.teeth || {}, sesion.teethObs || {});
+        }
+
+        function switchDentition(mode) {
+            const btnPerm = document.getElementById('btn-dentition-perm');
+            const btnDec = document.getElementById('btn-dentition-dec');
+            const gridPerm = document.getElementById('grid-permanente');
+            const gridDec = document.getElementById('grid-decidua');
+
+            if (mode === 'permanente') {
+                btnPerm.className = "px-3 py-1 rounded-md bg-white text-slate-800 shadow-sm";
+                btnDec.className = "px-3 py-1 rounded-md text-slate-500 hover:text-slate-800";
+                gridPerm.classList.remove('hidden');
+                gridDec.classList.add('hidden');
+            } else {
+                btnDec.className = "px-3 py-1 rounded-md bg-white text-slate-800 shadow-sm";
+                btnPerm.className = "px-3 py-1 rounded-md text-slate-500 hover:text-slate-800";
+                gridDec.classList.remove('hidden');
+                gridPerm.classList.add('hidden');
+            }
+        }
+
+        function renderTeethGrid(teethData, teethObsData) {
+            const upperContainer = document.getElementById('odontograma-upper');
+            const lowerContainer = document.getElementById('odontograma-lower');
+            const upperDecContainer = document.getElementById('odontograma-upper-dec');
+            const lowerDecContainer = document.getElementById('odontograma-lower-dec');
+
+            upperContainer.innerHTML = '';
+            lowerContainer.innerHTML = '';
+            upperDecContainer.innerHTML = '';
+            lowerDecContainer.innerHTML = '';
+
+            // Permanent
+            upperTeeth.forEach(num => upperContainer.appendChild(createToothElement(num, teethData[num] || 'sano', teethObsData[num])));
+            lowerTeeth.forEach(num => lowerContainer.appendChild(createToothElement(num, teethData[num] || 'sano', teethObsData[num])));
+
+            // Deciduous
+            upperDecidua.forEach(num => upperDecContainer.appendChild(createToothElement(num, teethData[num] || 'sano', teethObsData[num])));
+            lowerDecidua.forEach(num => lowerDecContainer.appendChild(createToothElement(num, teethData[num] || 'sano', teethObsData[num])));
+
+            renderHallazgosResumen(teethData, teethObsData);
+        }
+
+        function createToothElement(num, state, observation) {
             const div = document.createElement('div');
             const stateInfo = toothStates[state] || toothStates['sano'];
-            
-            div.className = `flex flex-col items-center justify-center w-10 h-12 rounded-xl border-2 cursor-pointer transition transform hover:scale-105 shadow-sm ${stateInfo.class}`;
-            div.onclick = () => toggleToothState(num);
+            const isAusente = state === 'ausente';
+
+            div.className = `relative flex flex-col items-center justify-center w-11 h-14 rounded-xl border-2 cursor-pointer transition transform hover:scale-105 shadow-sm select-none ${stateInfo.class}`;
+            div.title = `Pieza ${num}: ${stateInfo.label} ${observation ? '- ' + observation : ''}`;
+            div.onclick = () => openToothModal(num, state, observation);
+
             div.innerHTML = `
-                <i class="fa-solid fa-tooth text-sm"></i>
+                <i class="fa-solid ${stateInfo.icon} text-sm"></i>
                 <span class="text-xs font-bold mt-1">${num}</span>
+                ${isAusente ? '<span class="absolute text-red-600 font-extrabold text-xl">✕</span>' : ''}
             `;
             return div;
         }
 
-        function toggleToothState(num) {
-            const pacienteId = document.getElementById('select-paciente-odontograma').value;
-            if (!pacienteId) {
-                showToast('Por favor seleccione un paciente primero', 'error');
-                return;
-            }
-
-            if (!db.odontograma[pacienteId]) {
-                db.odontograma[pacienteId] = { notes: '', teeth: {} };
-            }
-
-            const current = db.odontograma[pacienteId].teeth[num] || 'sano';
-            const states = ['sano', 'caries', 'tratado', 'ausente'];
-            const nextState = states[(states.indexOf(current) + 1) % states.length];
-
-            db.odontograma[pacienteId].teeth[num] = nextState;
-            saveToLocalStorage();
-            renderOdontogramaTeeth();
+        function openToothModal(num, currentState, currentObs) {
+            document.getElementById('modal-tooth-num').value = num;
+            document.getElementById('modal-tooth-title').innerText = `Pieza Dental #${num}`;
+            document.getElementById('modal-tooth-status').value = currentState || 'sano';
+            document.getElementById('modal-tooth-obs').value = currentObs || '';
+            openModal('modal-tooth-detail');
         }
 
-        function loadOdontograma() {
+        function applyToothModalState() {
+            const num = document.getElementById('modal-tooth-num').value;
+            const newStatus = document.getElementById('modal-tooth-status').value;
+            const newObs = document.getElementById('modal-tooth-obs').value;
+
             const pacienteId = document.getElementById('select-paciente-odontograma').value;
-            const data = db.odontograma[pacienteId] || { notes: '', teeth: {} };
-            document.getElementById('odontograma-notas').value = data.notes || '';
-            renderOdontogramaTeeth();
+            const sesion = getActiveSesion();
+
+            if (!sesion) return;
+
+            if (!sesion.teeth) sesion.teeth = {};
+            if (!sesion.teethObs) sesion.teethObs = {};
+
+            sesion.teeth[num] = newStatus;
+            sesion.teethObs[num] = newObs;
+
+            // PERSISTENCE LOGIC FOR EXTRACTED / ABSENT TEETH IN FUTURE SESSIONS
+            if (newStatus === 'ausente') {
+                const sesiones = db.odontograma[pacienteId] || [];
+                const currentFecha = new Date(sesion.fechaClinica || sesion.fechaConsulta);
+
+                sesiones.forEach(s => {
+                    const sessionFecha = new Date(s.fechaClinica || s.fechaConsulta);
+                    if (sessionFecha >= currentFecha) {
+                        if (!s.teeth) s.teeth = {};
+                        s.teeth[num] = 'ausente';
+                    }
+                });
+            }
+
+            saveToLocalStorage();
+            closeModal('modal-tooth-detail');
+            loadOdontogramaPorFecha();
+            showToast(`Pieza ${num} actualizada`, 'info');
         }
 
         function saveOdontogramaNotas() {
-            const pacienteId = document.getElementById('select-paciente-odontograma').value;
-            if (!pacienteId) return;
+            const sesion = getActiveSesion();
+            if (!sesion) return;
 
-            if (!db.odontograma[pacienteId]) {
-                db.odontograma[pacienteId] = { notes: '', teeth: {} };
+            sesion.notes = document.getElementById('odontograma-notas').value;
+            saveToLocalStorage();
+            showToast('Observaciones de la consulta guardadas', 'success');
+        }
+
+        function crearNuevaSesionOdontograma() {
+            const pacienteId = document.getElementById('select-paciente-odontograma').value;
+            if (!pacienteId) {
+                showToast('Seleccione un paciente primero', 'error');
+                return;
             }
 
-            db.odontograma[pacienteId].notes = document.getElementById('odontograma-notas').value;
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('nueva-sesion-fecha-consulta').value = today;
+            document.getElementById('nueva-sesion-fecha-clinica').value = today;
+            openModal('modal-nueva-sesion');
+        }
+
+        function saveNuevaSesionOdontograma(e) {
+            e.preventDefault();
+            const pacienteId = document.getElementById('select-paciente-odontograma').value;
+            const fechaConsulta = document.getElementById('nueva-sesion-fecha-consulta').value;
+            const fechaClinica = document.getElementById('nueva-sesion-fecha-clinica').value;
+            const copiarPrevio = document.getElementById('nueva-sesion-copiar-previo').checked;
+
+            if (!db.odontograma[pacienteId]) {
+                db.odontograma[pacienteId] = [];
+            }
+
+            const sesiones = db.odontograma[pacienteId];
+            let initialTeeth = {};
+            let initialObs = {};
+
+            if (copiarPrevio && sesiones.length > 0) {
+                const sorted = [...sesiones].sort((a,b) => new Date(b.fechaClinica) - new Date(a.fechaClinica));
+                initialTeeth = JSON.parse(JSON.stringify(sorted[0].teeth || {}));
+                initialObs = JSON.parse(JSON.stringify(sorted[0].teethObs || {}));
+            }
+
+            const newSesionId = 'ses_' + Date.now();
+            sesiones.push({
+                id: newSesionId,
+                fechaConsulta: fechaConsulta,
+                fechaClinica: fechaClinica,
+                notes: '',
+                teeth: initialTeeth,
+                teethObs: initialObs
+            });
+
             saveToLocalStorage();
-            showToast('Notas clínicas guardadas', 'success');
+            closeModal('modal-nueva-sesion');
+            populateFechasOdontograma();
+            document.getElementById('select-fecha-odontograma').value = newSesionId;
+            loadOdontogramaPorFecha();
+            showToast('Nueva sesión registrada con doble fecha', 'success');
+        }
+
+        function renderHallazgosResumen(teethData, teethObsData) {
+            const container = document.getElementById('lista-hallazgos-dientes');
+            container.innerHTML = '';
+
+            const keys = Object.keys(teethData).filter(num => teethData[num] && teethData[num] !== 'sano');
+
+            if (keys.length === 0) {
+                container.innerHTML = `<p class="text-slate-400 italic">No hay diagnósticos especiales marcados (piezas sanas).</p>`;
+                return;
+            }
+
+            keys.sort((a,b) => parseInt(a) - parseInt(b)).forEach(num => {
+                const st = teethData[num];
+                const obs = teethObsData[num] || '';
+                const info = toothStates[st] || toothStates['sano'];
+
+                container.innerHTML += `
+                    <div class="p-2 rounded-lg bg-slate-50 border border-slate-100 space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-700">Pieza ${num}</span>
+                            <span class="px-2 py-0.5 rounded-md font-semibold text-xs ${info.class}">
+                                ${info.label}
+                            </span>
+                        </div>
+                        ${obs ? `<p class="text-slate-500 text-xs italic">${obs}</p>` : ''}
+                    </div>
+                `;
+            });
         }
 
         // --- COBROS ---
@@ -872,19 +1240,19 @@
             tbody.innerHTML = '';
 
             if (db.cobros.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No existen registros de cobros.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No hay registros de cobros.</td></tr>`;
                 return;
             }
 
             db.cobros.forEach(c => {
                 const paciente = db.pacientes.find(p => p.id === c.pacienteId);
-                const nombrePaciente = paciente ? paciente.nombre : 'Paciente Desconocido';
+                const nombrePaciente = paciente ? paciente.nombre : 'Paciente';
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-slate-50 transition">
                         <td class="p-4 font-medium text-slate-700">${c.fecha}</td>
                         <td class="p-4 font-semibold text-slate-800">${nombrePaciente}</td>
-                        <td class="p-4">${c.concepto}</td>
+                        <td class="p-4 text-slate-600">${c.concepto}</td>
                         <td class="p-4 font-bold text-emerald-600">$${parseFloat(c.monto).toFixed(2)}</td>
                         <td class="p-4 text-xs font-medium text-slate-600">${c.metodo}</td>
                     </tr>
@@ -907,46 +1275,50 @@
             saveToLocalStorage();
             closeModal('modal-cobro');
             renderCobros();
-            showToast('Cobro registrado exitosamente', 'success');
+            showToast('Cobro registrado en Lumos Dental Clinic', 'success');
         }
 
-        // --- EXCEL IMPORT / EXPORT (SheetJS) ---
+        // --- EXCEL IMPORT / EXPORT CON DUAL FECHAS ---
         function exportToExcel() {
             try {
                 const wb = XLSX.utils.book_new();
 
-                // 1. Sheet Pacientes
+                // 1. Pacientes Sheet
                 const wsPacientes = XLSX.utils.json_to_sheet(db.pacientes);
                 XLSX.utils.book_append_sheet(wb, wsPacientes, "Pacientes");
 
-                // 2. Sheet Citas
+                // 2. Citas Sheet
                 const wsCitas = XLSX.utils.json_to_sheet(db.citas);
                 XLSX.utils.book_append_sheet(wb, wsCitas, "Citas");
 
-                // 3. Sheet Cobros
+                // 3. Cobros Sheet
                 const wsCobros = XLSX.utils.json_to_sheet(db.cobros);
                 XLSX.utils.book_append_sheet(wb, wsCobros, "Cobros");
 
-                // 4. Sheet Odontograma
+                // 4. Historial Odontograma Sheet (incluye doble fecha)
                 const odontoArray = [];
                 Object.keys(db.odontograma).forEach(pacId => {
-                    const item = db.odontograma[pacId];
-                    odontoArray.push({
-                        pacienteId: pacId,
-                        notas: item.notes || '',
-                        dientes_JSON: JSON.stringify(item.teeth || {})
+                    const sesiones = db.odontograma[pacId] || [];
+                    sesiones.forEach(s => {
+                        odontoArray.push({
+                            pacienteId: pacId,
+                            Fecha_Consulta_Presencial: s.fechaConsulta || s.fecha || '',
+                            Fecha_Clinica_Registro: s.fechaClinica || s.fecha || '',
+                            Notas_Diagnostico: s.notes || '',
+                            Piezas_Estado_JSON: JSON.stringify(s.teeth || {}),
+                            Piezas_Observaciones_JSON: JSON.stringify(s.teethObs || {})
+                        });
                     });
                 });
                 const wsOdonto = XLSX.utils.json_to_sheet(odontoArray);
-                XLSX.utils.book_append_sheet(wb, wsOdonto, "Odontograma");
+                XLSX.utils.book_append_sheet(wb, wsOdonto, "Historial_Odontograma");
 
-                // Download File
-                const fileName = `Consultorio_Dental_BD_${new Date().toISOString().split('T')[0]}.xlsx`;
+                const fileName = `Lumos_Dental_Clinic_BD_${new Date().toISOString().split('T')[0]}.xlsx`;
                 XLSX.writeFile(wb, fileName);
-                showToast('Archivo de Excel generado correctamente', 'success');
+                showToast('Base de datos respaldada en Excel', 'success');
             } catch (error) {
                 console.error(error);
-                showToast('Error al exportar a Excel', 'error');
+                showToast('Error al exportar archivo Excel', 'error');
             }
         }
 
@@ -960,30 +1332,30 @@
                     const data = new Uint8Array(e.target.result);
                     const workbook = XLSX.read(data, { type: 'array' });
 
-                    // Import Pacientes
                     if (workbook.Sheets["Pacientes"]) {
                         db.pacientes = XLSX.utils.sheet_to_json(workbook.Sheets["Pacientes"]);
                     }
-
-                    // Import Citas
                     if (workbook.Sheets["Citas"]) {
                         db.citas = XLSX.utils.sheet_to_json(workbook.Sheets["Citas"]);
                     }
-
-                    // Import Cobros
                     if (workbook.Sheets["Cobros"]) {
                         db.cobros = XLSX.utils.sheet_to_json(workbook.Sheets["Cobros"]);
                     }
-
-                    // Import Odontograma
-                    if (workbook.Sheets["Odontograma"]) {
-                        const odontoRaw = XLSX.utils.sheet_to_json(workbook.Sheets["Odontograma"]);
+                    if (workbook.Sheets["Historial_Odontograma"]) {
+                        const odontoRaw = XLSX.utils.sheet_to_json(workbook.Sheets["Historial_Odontograma"]);
                         db.odontograma = {};
-                        odontoRaw.forEach(row => {
-                            db.odontograma[row.pacienteId] = {
-                                notes: row.notas || '',
-                                teeth: row.dientes_JSON ? JSON.parse(row.dientes_JSON) : {}
-                            };
+                        odontoRaw.forEach((row, idx) => {
+                            if (!db.odontograma[row.pacienteId]) {
+                                db.odontograma[row.pacienteId] = [];
+                            }
+                            db.odontograma[row.pacienteId].push({
+                                id: 'ses_imp_' + idx,
+                                fechaConsulta: row.Fecha_Consulta_Presencial || '',
+                                fechaClinica: row.Fecha_Clinica_Registro || '',
+                                notes: row.Notas_Diagnostico || '',
+                                teeth: row.Piezas_Estado_JSON ? JSON.parse(row.Piezas_Estado_JSON) : {},
+                                teethObs: row.Piezas_Observaciones_JSON ? JSON.parse(row.Piezas_Observaciones_JSON) : {}
+                            });
                         });
                     }
 
@@ -992,10 +1364,10 @@
                     renderPacientes();
                     renderCitas();
                     populatePacienteDropdowns();
-                    showToast('Base de datos cargada desde Excel correctamente', 'success');
+                    showToast('Datos restaurados exitosamente desde Excel', 'success');
                 } catch (err) {
                     console.error(err);
-                    showToast('Error al leer el archivo Excel. Verifique el formato.', 'error');
+                    showToast('Error al importar el archivo Excel', 'error');
                 }
             };
             reader.readAsArrayBuffer(file);
@@ -1010,7 +1382,7 @@
                 if (!el) return;
                 const currentVal = el.value;
                 el.innerHTML = db.pacientes.length === 0 
-                    ? '<option value="">No hay pacientes registrados</option>' 
+                    ? '<option value="">Sin pacientes registrados</option>' 
                     : '';
 
                 db.pacientes.forEach(p => {
@@ -1020,7 +1392,9 @@
                 if (currentVal) el.value = currentVal;
             });
 
-            if (db.pacientes.length > 0) loadOdontograma();
+            if (db.pacientes.length > 0) {
+                onPacienteOdontogramaChange();
+            }
         }
 
         function openModal(modalId) {
@@ -1039,7 +1413,6 @@
         function showToast(msg, type = 'info') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            
             const bgClass = type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-red-600' : 'bg-slate-800';
 
             toast.className = `${bgClass} text-white text-sm px-4 py-3 rounded-xl shadow-lg flex items-center space-x-2 transition-all duration-300 pointer-events-auto opacity-100`;
